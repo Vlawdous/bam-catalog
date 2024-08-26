@@ -1,0 +1,22 @@
+version: '3.9'
+
+services:
+  postgres:
+    image: postgres:16.4
+    restart: always
+    environment:
+      POSTGRES_DB: "catalog"
+      POSTGRES_USER: "bam"
+      POSTGRES_PASSWORD: "bam"
+    ports:
+      - "5432:5432"
+    networks:
+      - back
+    volumes:
+      - db:/var/lib/postgresql/data
+
+volumes:
+  db:
+
+networks:
+  back:
