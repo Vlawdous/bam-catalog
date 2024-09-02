@@ -33,11 +33,8 @@ func Run() error {
 		return err
 	}
 
-	// TODO: придумать, как его запихать в обработчик запроса
-	fmt.Println(container)
-
 	log.Print("Initialization router")
-	router, err := approuter.NewRouter()
+	router, err := approuter.NewRouter(container)
 	if err != nil {
 		return err
 	}
@@ -47,8 +44,9 @@ func Run() error {
 	server := &http.Server{
 		Addr:         addr,
 		Handler:      router,
-		ReadTimeout:  10 * time.Second,
-		WriteTimeout: 10 * time.Second,
+		ReadTimeout:  time.Duration(config.ListenConfig.ReadTimeoutSeconds) * time.Second,
+		WriteTimeout: time.Duration(config.ListenConfig.WriteTimeoutSeconds) * time.Second,
+		IdleTimeout:  time.Duration(config.ListenConfig.IdleTimeoutSeconds) * time.Second,
 	}
 
 	log.Print("Start HTTP server")

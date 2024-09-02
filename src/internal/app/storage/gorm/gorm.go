@@ -1,19 +1,19 @@
-package pgsql
+package gorm
 
 import (
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
 
-type PostgresStorage struct {
+type Storage struct {
 	db *gorm.DB
 }
 
-func NewPostgresStorage(databaseDsn string) (*PostgresStorage, error) {
+func NewPostgresStorage(databaseDsn string) (*Storage, error) {
 	db, err := gorm.Open(postgres.Open(databaseDsn), &gorm.Config{})
 	if err != nil {
 		return nil, err
 	}
 
-	return &PostgresStorage{db: db}, nil
+	return &Storage{db: db}, nil
 }

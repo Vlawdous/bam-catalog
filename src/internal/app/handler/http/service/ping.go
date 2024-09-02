@@ -9,7 +9,7 @@ type PingResponse struct {
 	Result string `json:"result"`
 }
 
-func Ping(w http.ResponseWriter, r *http.Request) {
+func (s *Service) Ping(w http.ResponseWriter, _ *http.Request) {
 	response := PingResponse{"pong"}
 	responseJson, err := json.Marshal(response)
 

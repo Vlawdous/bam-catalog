@@ -16,8 +16,11 @@ type Config struct {
 }
 
 type ListenConfig struct {
-	Address string `env:"ADDRESS" envDefault:"0.0.0.0"`
-	Port    string `env:"PORT" envDefault:"8080"`
+	Address             string `env:"ADDRESS" envDefault:"0.0.0.0"`
+	Port                string `env:"PORT" envDefault:"8080"`
+	ReadTimeoutSeconds  int    `env:"READ_TIMEOUT" envDefault:"10"`
+	WriteTimeoutSeconds int    `env:"WRITE_TIMEOUT" envDefault:"10"`
+	IdleTimeoutSeconds  int    `env:"IDLE_TIMEOUT" envDefault:"10"`
 }
 
 type AppConfig struct {
