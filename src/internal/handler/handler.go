@@ -1,6 +1,8 @@
 package handler
 
-import "bam-catalog/internal/app/container"
+import (
+	"bam-catalog/internal/core/container"
+)
 
 type Handler struct {
 	Container *container.Container

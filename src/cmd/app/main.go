@@ -1,14 +1,14 @@
 package main
 
 import (
-	"bam-catalog/internal/app"
+	"bam-catalog/internal/core"
 	"log"
 )
 
 func main() {
 	log.Print("Start application")
 
-	err := app.Run()
+	err := core.Run()
 	if err != nil {
 		log.Fatal(err)
 	}

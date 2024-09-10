@@ -1,8 +1,8 @@
 package router
 
 import (
-	"bam-catalog/internal/app/container"
-	"bam-catalog/internal/app/handler/http/service"
+	"bam-catalog/internal/core/container"
+	"bam-catalog/internal/handler/http/service"
 	"github.com/go-chi/chi/v5"
 )
 

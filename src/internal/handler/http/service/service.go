@@ -1,8 +1,8 @@
 package service
 
 import (
-	"bam-catalog/internal/app/container"
-	"bam-catalog/internal/app/handler"
+	"bam-catalog/internal/core/container"
+	"bam-catalog/internal/handler"
 )
 
 type Service struct {

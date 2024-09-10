@@ -1,8 +1,9 @@
-package app
+package core
 
 import (
-	appconfig "bam-catalog/internal/app/config"
-	appcontainer "bam-catalog/internal/app/container"
+	appconfig "bam-catalog/internal/config"
+	config2 "bam-catalog/internal/core/config"
+	appcontainer "bam-catalog/internal/core/container"
 	"fmt"
 	"io"
 	"log"
@@ -25,7 +26,7 @@ func StartCommand() error {
 	}
 
 	log.Print("Collect config properties")
-	config := appconfig.GetConfig()
+	config := config2.GetConfig()
 
 	log.Print("Initialization container")
 	container, err := appcontainer.NewContainer(&config, &log.Logger{})

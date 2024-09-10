@@ -1,8 +1,8 @@
 package container
 
 import (
-	appconfig "bam-catalog/internal/app/config"
-	"bam-catalog/internal/app/storage/gorm"
+	appconfig "bam-catalog/internal/core/config"
+	"bam-catalog/internal/core/storage/gorm"
 	"log"
 )
 

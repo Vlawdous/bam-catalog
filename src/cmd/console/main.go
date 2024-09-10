@@ -1,7 +1,7 @@
 package main
 
 import (
-	"bam-catalog/internal/app"
+	"bam-catalog/internal/core"
 	"fmt"
 	"log"
 )
@@ -9,7 +9,7 @@ import (
 func main() {
 	fmt.Print("Start command")
 
-	err := app.StartCommand()
+	err := core.StartCommand()
 	if err != nil {
 		log.Fatal(err)
 	}
