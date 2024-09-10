@@ -6,7 +6,7 @@ import (
 )
 
 type Storage struct {
-	Db *gorm.DB
+	*gorm.DB
 }
 
 func NewPostgresStorage(databaseDsn string) (*Storage, error) {
@@ -15,5 +15,5 @@ func NewPostgresStorage(databaseDsn string) (*Storage, error) {
 		return nil, err
 	}
 
-	return &Storage{Db: db}, nil
+	return &Storage{DB: db}, nil
 }

@@ -3,13 +3,15 @@ package main
 import (
 	"bam-catalog/internal/core"
 	"log"
+	"os"
 )
 
 func main() {
-	log.Print("Start application")
+	log.SetOutput(os.Stdout)
+	log.Print("Запуск приложения")
 
-	err := core.Run()
+	err := core.RunHttp()
 	if err != nil {
-		log.Fatal(err)
+		log.Fatal("Не удалось запустить приложение: " + err.Error())
 	}
 }

@@ -9,7 +9,7 @@ type BookRepository struct {
 func (br *BookRepository) findById(id string) *entity.Book {
 	searchableBook := &entity.Book{}
 
-	br.storage.Db.First(searchableBook, id)
+	br.First(searchableBook, id)
 	return searchableBook
 }
 

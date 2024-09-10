@@ -3,9 +3,9 @@ package repository
 import "bam-catalog/internal/core/storage/gorm"
 
 type Repository struct {
-	storage *gorm.Storage
+	*gorm.Storage
 }
 
 func NewRepository(storage *gorm.Storage) *Repository {
-	return &Repository{storage: storage}
+	return &Repository{storage}
 }

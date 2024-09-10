@@ -1,27 +1,38 @@
 package container
 
 import (
-	appconfig "bam-catalog/internal/core/config"
+	appConfig "bam-catalog/internal/core/config"
+	"bam-catalog/internal/core/logger"
 	"bam-catalog/internal/core/storage/gorm"
-	"log"
+	"bam-catalog/internal/repository"
 )
 
 type Container struct {
-	Config          *appconfig.Config
-	Logger          *log.Logger
-	PostgresStorage *gorm.Storage
+	Config       *appConfig.Config
+	Logger       *logger.Logger
+	Repositories *Repositories
 }
 
-func NewContainer(config *appconfig.Config, logger *log.Logger) (*Container, error) {
+type Repositories struct {
+	BookRepository *repository.BookRepository
+}
+
+func NewContainer(config *appConfig.Config, logger *logger.Logger) (*Container, error) {
 	pgsqlStorage, err := gorm.NewPostgresStorage(config.AppConfig.DatabaseDSN)
 	if err != nil {
 		return nil, err
 	}
 
+	baseRepository := &repository.Repository{Storage: pgsqlStorage}
+
+	repositories := &Repositories{
+		BookRepository: &repository.BookRepository{Repository: baseRepository},
+	}
+
 	container := Container{
 		config,
 		logger,
-		pgsqlStorage,
+		repositories,
 	}
 
 	return &container, nil
