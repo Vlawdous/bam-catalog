@@ -5,7 +5,7 @@ import (
 	appContainer "bam-catalog/internal/core/container"
 	appLogger "bam-catalog/internal/core/logger"
 	"bam-catalog/internal/handler"
-	"bam-catalog/internal/handler/console/migration"
+	"bam-catalog/internal/handler/cli/migration"
 	"github.com/urfave/cli/v2"
 	"os"
 )
