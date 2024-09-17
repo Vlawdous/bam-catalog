@@ -28,5 +28,5 @@ func NewLogger(logFilePath string, env string) *Logger {
 	zapCore := zapcore.NewCore(encoder, writer, logLevel)
 	logger := zap.New(zapCore)
 
-	return &Logger{logger: logger}
+	return &Logger{Logger: logger}
 }

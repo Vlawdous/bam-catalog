@@ -7,30 +7,59 @@ import (
 	"bam-catalog/internal/handler"
 	"bam-catalog/internal/handler/console/migration"
 	"github.com/urfave/cli/v2"
-	"log"
+	"os"
 )
 
 func RunCli() error {
-	log.Print("Инициализация и получение конфига")
 	config, err := appConfig.GetConfig()
 	if err != nil {
 		return err
 	}
 
-	log.Print("Инициализация логгера")
 	logger := appLogger.NewLogger(config.AppConfig.LogFilePath, config.Env)
 
-	log.Print("Инициализация контейнера")
 	container, err := appContainer.NewContainer(config, logger)
 	if err != nil {
 		return err
 	}
 
+	cliApp := cli.App{Commands: getCommands(container)}
+
+	err = cliApp.Run(os.Args)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func getCommands(container *appContainer.Container) []*cli.Command {
 	consoleHandler := &handler.Handler{Container: container}
 
 	migrationHandler := &migration.Migration{Handler: consoleHandler}
 
-	cliApp := cli.App{}
+	return []*cli.Command{
+		{
+			Name:    "migrate",
+			Aliases: []string{"m"},
+			Usage:   "run migrate",
+			Subcommands: []*cli.Command{
+				{
+					Name:   "up",
+					Usage:  "run all migrate up",
+					Action: migrationHandler.Up,
+				},
+				{
+					Name:   "down",
+					Usage:  "run migrate down count",
+					Action: migrationHandler.Down,
+				},
+				{
+					Name:   "new",
+					Usage:  "run create migration",
+					Action: migrationHandler.New,
+				},
+			},
+		},
+	}
 }
-
-func getCommands()
