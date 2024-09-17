@@ -49,9 +49,10 @@ type ListenConfig struct {
 }
 
 type AppConfig struct {
-	ProjectPath string
-	LogFilePath string `env:"LOG_FILE_PATH"`
-	DatabaseDSN string `env:"DATABASE_DSN,required"`
+	ProjectPath   string
+	LogFilePath   string `env:"LOG_FILE_PATH"`
+	MigrationPath string `env:"MIGRATION_PATH"`
+	DatabaseDSN   string `env:"DATABASE_DSN,required"`
 }
 
 func GetConfig() (*Config, error) {
@@ -71,5 +72,9 @@ func GetConfig() (*Config, error) {
 func loadEmptyOptionalProperties(config *Config) {
 	if "" == config.AppConfig.LogFilePath {
 		config.AppConfig.LogFilePath = config.AppConfig.ProjectPath + "/logs"
+	}
+
+	if "" == config.AppConfig.MigrationPath {
+		config.AppConfig.MigrationPath = config.AppConfig.ProjectPath + "/migrations"
 	}
 }

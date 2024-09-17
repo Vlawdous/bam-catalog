@@ -7,7 +7,7 @@ import (
 )
 
 type Logger struct {
-	logger *zap.Logger
+	*zap.Logger
 }
 
 func NewLogger(logFilePath string, env string) *Logger {
