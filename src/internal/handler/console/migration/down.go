@@ -5,7 +5,7 @@ import (
 	"github.com/urfave/cli/v2"
 )
 
-func (m *Migration) Up(_ *cli.Context) error {
+func (m *Migration) Down(_ *cli.Context) error {
 	migrator, err := m.createMigrator()
 	if err != nil {
 		return err
@@ -15,7 +15,7 @@ func (m *Migration) Up(_ *cli.Context) error {
 		return errors.New("empty migrator")
 	}
 
-	err = migrator.Up()
+	err = migrator.Down()
 	if err != nil {
 		return err
 	}
