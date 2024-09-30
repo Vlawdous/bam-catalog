@@ -6,18 +6,22 @@ import (
 	"log"
 	"os"
 	"path/filepath"
+	"strings"
 )
 
 var projectPath string
 
 func init() {
+	test := filepath.Dir(os.Args[0])
+	log.Print(test)
+
 	execPath, err := filepath.Abs(filepath.Dir(os.Args[0]))
 
 	if err != nil {
 		log.Fatal("Не удалось найти директорию проекта: " + err.Error())
 	}
 
-	projectPath = execPath
+	projectPath = strings.Replace(execPath, "\\", "/", -1)
 
 	localEnvErr := godotenv.Load(filepath.Join(projectPath, ".env.local"))
 	if localEnvErr != nil {

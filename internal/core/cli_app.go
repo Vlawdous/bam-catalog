@@ -42,22 +42,41 @@ func getCommands(container *appContainer.Container) []*cli.Command {
 		{
 			Name:    "migrate",
 			Aliases: []string{"m"},
-			Usage:   "run migrate",
+			Usage:   "Общая команда миграций",
 			Subcommands: []*cli.Command{
 				{
 					Name:   "up",
-					Usage:  "run all migrate up",
+					Usage:  "Поднять версионность БД",
 					Action: migrationHandler.Up,
+					Flags: []cli.Flag{
+						&cli.IntFlag{
+							Name:    "steps",
+							Aliases: []string{"s"},
+						},
+					},
 				},
 				{
 					Name:   "down",
-					Usage:  "run migrate down count",
+					Usage:  "Опустить версионность БД",
 					Action: migrationHandler.Down,
+					Flags: []cli.Flag{
+						&cli.IntFlag{
+							Name:    "steps",
+							Aliases: []string{"s"},
+						},
+					},
 				},
 				{
 					Name:   "new",
-					Usage:  "run create migration",
+					Usage:  "Создать новую миграцию",
 					Action: migrationHandler.New,
+					Flags: []cli.Flag{
+						&cli.StringFlag{
+							Name:     "name",
+							Aliases:  []string{"n"},
+							Required: true,
+						},
+					},
 				},
 			},
 		},

@@ -1,18 +1,25 @@
 package migration
 
 import (
+	"errors"
 	"github.com/urfave/cli/v2"
 	"os"
+	"strconv"
 	"time"
 )
 
-func (m *Migration) New(_ *cli.Context) error {
-	newFileName := time.Now().Format("20060102_150405")
+func (m *Migration) New(c *cli.Context) error {
+	name := c.String("name")
+	if name == "" {
+		return errors.New("name is required")
+	}
+
+	newFileName := strconv.FormatInt(time.Now().Unix(), 10) + "_" + name
 
 	var newMigrationPath string = m.Container.Config.AppConfig.MigrationPath + "/"
 
-	newUpMigrationFilePath := newMigrationPath + newFileName + ".sql.up"
-	newDownMigrationFilePath := newMigrationPath + newFileName + ".sql.down"
+	newUpMigrationFilePath := newMigrationPath + newFileName + ".up.sql"
+	newDownMigrationFilePath := newMigrationPath + newFileName + ".down.sql"
 
 	newUpMigrationFile, err := os.Create(newUpMigrationFilePath)
 
