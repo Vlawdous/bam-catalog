@@ -22,4 +22,4 @@ jobs:
         run: ssh-keyscan -H ${{ secrets.DEV_SERVER_HOST }} >> ~/.ssh/known_hosts
 
       # Deploy
-      - run: rsync --archive --compress --progress . ${{ secrets.DEV_SERVER_USER }}@${{ secrets.DEV_SERVER_HOST }}:${{ secrets.DEV_SERVER_PATH }}
+      - run: rsync -vvv --archive --compress --progress . ${{ secrets.DEV_SERVER_USER }}@${{ secrets.DEV_SERVER_HOST }}:${{ secrets.DEV_SERVER_PATH }}
